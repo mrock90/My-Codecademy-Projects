@@ -31,7 +31,7 @@ else:
     answer = "Very Doubtful"
   elif random_number == 10:
     answer = "Better luck next time"
-  elif randon_number == 11:
+  elif random_number == 11:
     answer = "Maybe, maybe not"
   elif random_number == 12:
     answer = "Welcome to the Multiverse"
