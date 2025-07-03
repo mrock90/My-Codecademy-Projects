@@ -255,14 +255,16 @@ for transactions in daily_transactions_split:
 
   # print(transactions_clean)
 
-  # customers = []
-  # sales = []
-  # thread_sold = []
+  customers = []
+  sales = []
+  thread_sold = []
 # Using a for loop
-# for transaction_detail in transactions_clean:
-  # customer = transaction_detail[0]
-  # sale = transaction_detail[1]
-  # thread = transaction_detail[2]
+for transaction_detail in transactions_clean:
+  # Ensure there are enough elements before accessing indices
+  if len(transaction_detail) >= 3:
+    customers.append(transaction_detail[0])
+    sales.append(transaction_detail[1])
+    thread_sold.append(transaction_detail[2])
   # Extract customer, sales, and thread information
   # Or using unpacking
   # customer, sale, thread = transaction_detail[:3]
@@ -271,10 +273,10 @@ for transactions in daily_transactions_split:
   # thread_sold.append(thread)
 
   # Using List Comprehension
-  customers = [transaction_detail[0] for transaction_detail in transactions_clean]
-  sales = [transaction_detail[1] for transaction_detail in transactions_clean]
-  thread_sold = [transaction_detail[2] for transaction_detail in transactions_clean]
-  # print(customers)
+  # customers = [transaction_detail[0] for transaction_detail in transactions_clean]
+  # sales = [transaction_detail[1] for transaction_detail in transactions_clean]
+  # thread_sold = [transaction_detail[2] for transaction_detail in transactions_clean]
+  # # print(customers)
   # print(sales)
   # print(thread_sold)
 
@@ -327,3 +329,48 @@ for color_name in colors:
   count = color_count(color_name)
   sentence = "Thread Shed sold {count} threads of {color_name} today."
   print(sentence.format(count=count, color_name=color_name))
+
+# --- Pandas Enhancement: Identify Top 5 Customers by Total Spending ---
+import pandas as pd
+  
+# 1. Create a dictionary for my DataFrame
+data = {
+  'Customer Name':customers,
+  'Sale Amount': [float(s.replace('$', '')) for s in sales]
+}
+
+# 2. Create the DataFrame
+df_sales = pd.DataFrame(data)
+
+# 3. Print the head of the DataFrame to verify
+print("\n--- Original Sales DataFrame Head ---")
+print(df_sales.head())
+print("\n")
+
+# --- Pandas Enhancement: Step 3: Group by 'Customer Name' and sum 'Sale Amount' ---
+
+# Group by 'Customer Name' and sum the 'Sale Amount' for each customer
+customer_spending = df_sales.groupby('Customer Name')['Sale Amount'].sum()
+
+# The result is a Pandas Series where the index is the customer name and the Values are thier total spending.
+print("--- Total Spending per Customer (first 5 entries) ---")
+print(customer_spending.head())
+print("\n")
+
+# --- Pandas Enhancement: Step 4: Sort the results in descending order ---
+
+# Sort the customer spending from highest to lowest
+top_customers = customer_spending.sort_values(ascending = False)
+
+print("--- Total Spending per Customer (Sorted, First 5 entries) ---")
+print(top_customers.head())
+print("\n")
+
+# --- Pandas Enhancement: Step 5: Select the Top 5 Customers ---
+
+# Select the top 5 customers from the sorted list
+top_5_customers_by_spending = top_customers.head(5)
+
+print("--- Top 5 Customers by Total Spending ---")
+print(top_5_customers_by_spending)
+print("\n")

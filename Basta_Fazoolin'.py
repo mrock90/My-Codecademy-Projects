@@ -221,7 +221,7 @@ basta = Business("Basta Fazoolin' with my Heart", [flagship_store, new_installme
 arepas_items = {
   'arepa pabellon': 7.00, 'pernil arepa': 8.50, 'guayanes arepa': 8.00, 'jamon arepa': 7.50
 }
-arepas_menu = Menu("Take a’ Arepa", arepas_items,1000, 2000)
+arepas_menu = Menu("Take a' Arepa", arepas_items,1000, 2000)
 
 arepas_place = Franchise('189 Fitzgerald Avenue', [arepas_menu])
 
