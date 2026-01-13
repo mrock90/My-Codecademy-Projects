@@ -1,4 +1,4 @@
-# Thead Shed Coding challenge Instructions
+# Python_Revenue_Operations_Analytics Instructions
 
 """
     Break up `daily_sales` in easy to understand lists `customers`, `sales`, and `thread_sold`.
